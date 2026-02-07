@@ -1,6 +1,6 @@
 {
   "name": "react-native-linear-gradient-fabric",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A modern replacement for react-native-linear-gradient with full Fabric support",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
