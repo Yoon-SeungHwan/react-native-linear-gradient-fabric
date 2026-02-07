@@ -56,9 +56,9 @@ These issues are the core reason this library exists - full New Architecture (Fa
 
 **Problem:** Gradient from `'transparent'` to `'#FFFFFF'` shows grey instead of proper transparent-to-white.
 
-**Our Status:** **FIXED** - Added `fixTransparentColors()` function that replaces transparent colors with transparent versions of their nearest opaque neighbor.
+**Our Status:** **KNOWN LIMITATION** - This is caused by premultiplied alpha interpolation in both iOS (CAGradientLayer) and Android (LinearGradient). The native gradient implementations blend colors in premultiplied alpha space, causing grey artifacts. Workaround: Use explicit transparent colors like `rgba(255,255,255,0)` instead of `'transparent'`.
 
-**Priority:** MEDIUM
+**Priority:** LOW (platform limitation)
 
 ---
 

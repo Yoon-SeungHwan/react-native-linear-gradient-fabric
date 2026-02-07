@@ -15,7 +15,7 @@ import {
   BorderRadiusTest,
   InitialPropsTest,
   LocationsTest,
-  TransparentGradientTest,
+  NestedContentTest,
   ZeroDimensionTest,
 } from './src/screens';
 
@@ -24,7 +24,7 @@ const isNewArchitecture = (global as any).__turboModuleProxy != null;
 
 type Screen =
   | 'home'
-  | 'transparent'
+  | 'nestedContent'
   | 'angle'
   | 'borderRadius'
   | 'zeroDimension'
@@ -33,7 +33,7 @@ type Screen =
 
 const screens: {id: Screen; title: string; issue?: string}[] = [
   {id: 'home', title: 'Home'},
-  {id: 'transparent', title: 'Transparent', issue: '#691'},
+  {id: 'nestedContent', title: 'Nested Content'},
   {id: 'angle', title: 'Angles', issue: '#576'},
   {id: 'borderRadius', title: 'Border Radius', issue: '#579'},
   {id: 'zeroDimension', title: 'Zero Dimension', issue: '#652'},
@@ -174,8 +174,8 @@ function App(): React.JSX.Element {
 
   const renderScreen = () => {
     switch (currentScreen) {
-      case 'transparent':
-        return <TransparentGradientTest />;
+      case 'nestedContent':
+        return <NestedContentTest />;
       case 'angle':
         return <AngleTest />;
       case 'borderRadius':
