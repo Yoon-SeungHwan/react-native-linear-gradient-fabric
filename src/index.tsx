@@ -65,7 +65,14 @@ function processColors(colors: ColorValue[]): number[] {
     if (processed === null || processed === undefined) {
       throw new Error(`Invalid color value: ${String(color)}`);
     }
-    return typeof processed === 'number' ? processed : 0;
+    if (typeof processed === 'number') {
+      return processed;
+    }
+    // OpaqueColorValue (symbol type) or other non-number values
+    // This can happen with platform-specific color types
+    throw new Error(
+      `Unsupported color type: ${String(color)}. Only standard color values are supported.`
+    );
   });
 }
 
@@ -83,7 +90,8 @@ function validateLocations(
     );
   }
 
-  return locations;
+  // Clamp location values to [0, 1] range for iOS CAGradientLayer compatibility
+  return locations.map((value) => Math.max(0, Math.min(1, value)));
 }
 
 export function LinearGradient({
