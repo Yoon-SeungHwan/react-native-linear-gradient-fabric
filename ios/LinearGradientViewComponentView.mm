@@ -40,6 +40,7 @@ using namespace facebook::react;
 
         _gradientLayer = [CAGradientLayer layer];
         _gradientLayer.frame = self.bounds;
+        _gradientLayer.zPosition = -1000;
         [self.layer insertSublayer:_gradientLayer atIndex:0];
 
         // Set default values
@@ -59,6 +60,7 @@ using namespace facebook::react;
 {
     [super layoutSubviews];
     _gradientLayer.frame = self.bounds;
+    [self updateGradient];
 }
 
 - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
