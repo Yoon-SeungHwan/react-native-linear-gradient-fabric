@@ -7,10 +7,10 @@ This document analyzes issues from the [original repository](https://github.com/
 | Category | Count | Status |
 |----------|-------|--------|
 | Already Solved (Fabric) | 3 | Done |
-| Already Handled | 2 | Done |
-| Potential Bugs to Fix | 6 | TODO |
+| Already Handled | 8 | Done |
+| Potential Bugs to Investigate | 1 | TODO |
 | Feature Requests | 4 | Future |
-| TypeScript Issues | 2 | TODO |
+| TypeScript Issues | 0 | Done |
 | Not Applicable | 33 | N/A |
 
 ---
@@ -44,7 +44,7 @@ These issues are the core reason this library exists - full New Architecture (Fa
 
 **Problem:** Crash on iOS 17+ when LinearGradient has width = 0 (animated from 0).
 
-**Our Status:** NEEDS FIX - Add guard for zero dimensions in iOS native code.
+**Our Status:** **FIXED** in commit `4d952ef` - Added guard for zero dimensions in iOS native code.
 
 **Priority:** HIGH
 
@@ -56,7 +56,7 @@ These issues are the core reason this library exists - full New Architecture (Fa
 
 **Problem:** Gradient from `'transparent'` to `'#FFFFFF'` shows grey instead of proper transparent-to-white.
 
-**Our Status:** NEEDS INVESTIGATION - May be related to color processing or premultiplied alpha.
+**Our Status:** **FIXED** - Added `fixTransparentColors()` function that replaces transparent colors with transparent versions of their nearest opaque neighbor.
 
 **Priority:** MEDIUM
 
@@ -68,7 +68,7 @@ These issues are the core reason this library exists - full New Architecture (Fa
 
 **Problem:** iOS doesn't accept `locations` values greater than 1, while Android does.
 
-**Our Status:** NEEDS FIX - Should clamp locations to 0-1 range on both platforms for consistency.
+**Our Status:** **FIXED** in commit `e4c5d1b` - Locations are now clamped to [0, 1] range for cross-platform consistency.
 
 **Priority:** MEDIUM
 
@@ -80,7 +80,7 @@ These issues are the core reason this library exists - full New Architecture (Fa
 
 **Problem:** `angle` prop not working correctly in some cases.
 
-**Our Status:** NEEDS VERIFICATION - Test angle calculations on both platforms.
+**Our Status:** **VERIFIED** - Angle calculations are correct. The issue in original library was users not setting `useAngle={true}`. Added angle calculation tests.
 
 **Priority:** MEDIUM
 
@@ -92,7 +92,7 @@ These issues are the core reason this library exists - full New Architecture (Fa
 
 **Problem:** When `startPoint` is `{x: 0, y: 0}`, props comparison fails because oldProps defaults to 0.
 
-**Our Status:** LIKELY SOLVED - Our `updateProps` always applies new values without comparing. Needs verification.
+**Our Status:** **SOLVED** - Our `updateProps` implementation unconditionally applies all props without comparing, avoiding this issue.
 
 **Priority:** LOW (verify only)
 
@@ -118,7 +118,7 @@ These issues are the core reason this library exists - full New Architecture (Fa
 
 **Problem:** Type `'OpaqueColorValue'` is not assignable to type `'string | number'`.
 
-**Our Status:** NEEDS FIX - Our `colors` prop accepts `ColorValue[]` which includes `OpaqueColorValue`.
+**Our Status:** **FIXED** in commit `e4c5d1b` - Now throws explicit error for unsupported OpaqueColorValue types.
 
 **Priority:** HIGH
 
@@ -130,7 +130,7 @@ These issues are the core reason this library exists - full New Architecture (Fa
 
 **Problem:** TypeScript shows incorrect hints.
 
-**Our Status:** NEEDS INVESTIGATION - Review our type definitions.
+**Our Status:** **FIXED** - Extended `ViewProps` in `LinearGradientProps`, fixed import order, added proper type checks.
 
 **Priority:** LOW
 
@@ -157,32 +157,36 @@ These issues are not applicable to our implementation (build issues with old com
 
 ## Action Plan
 
-### Phase 1: Critical Bug Fixes (HIGH Priority)
+### Phase 1: Critical Bug Fixes (HIGH Priority) - COMPLETED
 
-1. **Fix iOS zero-dimension crash** (#652)
-   - Add guard in `LinearGradientViewComponentView.mm` and `LinearGradientView.m`
+1. ~~**Fix iOS zero-dimension crash** (#652)~~ - **DONE** (commit `4d952ef`)
+   - Added guard in `LinearGradientViewComponentView.mm` and `LinearGradientView.m`
 
-2. **Fix TypeScript OpaqueColorValue issue** (#647)
-   - Update `LinearGradientProps.colors` type handling
+2. ~~**Fix TypeScript OpaqueColorValue issue** (#647)~~ - **DONE** (commit `e4c5d1b`)
+   - Throw explicit error for unsupported color types
 
-### Phase 2: Medium Priority Fixes
+3. ~~**Clamp locations to 0-1 range** (#591)~~ - **DONE** (commit `e4c5d1b`)
+   - Added validation in `validateLocations()` function
 
-3. **Clamp locations to 0-1 range** (#591)
-   - Add validation in `validateLocations()` function
+### Phase 2: Medium Priority Fixes - COMPLETED
 
-4. **Investigate transparent-to-white issue** (#691)
-   - Check color processing for transparent colors
+4. ~~**Investigate transparent-to-white issue** (#691)~~ - **DONE**
+   - Added `fixTransparentColors()` function to fix grey interpolation
+   - Transparent colors now inherit RGB from nearest opaque neighbor
 
-5. **Verify angle calculations** (#576)
-   - Add comprehensive angle tests
+5. ~~**Verify angle calculations** (#576)~~ - **DONE**
+   - Verified angle calculations are correct on both platforms
+   - Added `angleCalculation.test.ts` with comprehensive tests
 
-6. **Test on physical Android devices** (#641)
+6. **Test on physical Android devices** (#641) - PENDING (requires manual testing)
    - Verify gradient rendering matches expectations
 
-### Phase 3: Verification
+### Phase 3: Verification - COMPLETED
 
-7. **Verify initial props handling** (#639)
-   - Confirm our implementation handles x=0, y=0 correctly
+7. ~~**Verify initial props handling** (#639)~~ - **DONE**
+   - Confirmed our implementation handles x=0, y=0 correctly
+   - Props are unconditionally applied without comparison
 
-8. **Review TypeScript hints** (#649)
-   - Ensure type definitions are complete and accurate
+8. ~~**Review TypeScript hints** (#649)~~ - **DONE**
+   - Extended ViewProps in LinearGradientProps
+   - Fixed import order and type checks
