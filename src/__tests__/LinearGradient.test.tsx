@@ -15,7 +15,7 @@ jest.mock('../LinearGradientNativeComponent', () => {
 describe('LinearGradient', () => {
   it('should throw an error if less than 2 colors are provided', () => {
     expect(() => {
-      // @ts-expect-error Testing invalid input
+      // Runtime validation - TypeScript cannot enforce minimum array length
       <LinearGradient colors={['#ff0000']} />;
     }).toThrow('LinearGradient requires at least 2 colors');
   });
