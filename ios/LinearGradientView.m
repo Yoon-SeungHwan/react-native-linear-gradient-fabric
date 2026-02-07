@@ -72,6 +72,11 @@
 
 - (void)updateGradient
 {
+    // Guard against zero-dimension bounds (iOS 17+ crash fix, see issue #652)
+    if (self.bounds.size.width <= 0 || self.bounds.size.height <= 0) {
+        return;
+    }
+
     if (!_colors || _colors.count == 0) {
         return;
     }
