@@ -67,7 +67,7 @@ class LinearGradientView(context: Context) : FrameLayout(context) {
     }
 
     override fun onDraw(canvas: Canvas) {
-        if (colors.size < 2 || width == 0 || height == 0) {
+        if (colors.size < 2 || width <= 0 || height <= 0) {
             super.onDraw(canvas)
             return
         }
