@@ -16,3 +16,11 @@ A modern replacement for `react-native-linear-gradient` with full New Architectu
 
 - Use recommended ESLint config for React Native (`@react-native/eslint-config`)
 - Import statements must be sorted alphabetically
+
+## Additional issues link from Original repository
+
+- https://github.com/react-native-linear-gradient/react-native-linear-gradient/issues
+
+## Additional Pull requests from Original repository
+
+- https://github.com/react-native-linear-gradient/react-native-linear-gradient/pulls
