@@ -40,6 +40,7 @@
     "react-native",
     "ios",
     "android",
+    "react-native-linear-gradient",
     "linear-gradient",
     "gradient",
     "fabric",
@@ -47,14 +48,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/seunghwanyoon/react-native-linear-gradient-fabric.git"
+    "url": "git+https://github.com/Yoon-SeungHwan/react-native-linear-gradient-fabric.git"
   },
-  "author": "Seunghwan Yoon <seunghwan@example.com> (https://github.com/seunghwanyoon)",
+  "author": "Seunghwan Yoon <hwani6736@gmail.com> (https://github.com/Yoon-SeungHwan)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/seunghwanyoon/react-native-linear-gradient-fabric/issues"
+    "url": "https://github.com/Yoon-SeungHwan/react-native-linear-gradient-fabric/issues"
   },
-  "homepage": "https://github.com/seunghwanyoon/react-native-linear-gradient-fabric#readme",
+  "homepage": "https://github.com/Yoon-SeungHwan/react-native-linear-gradient-fabric#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
