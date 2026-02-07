@@ -1,0 +1,13 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "*.{js,ts,tsx}"
+      run: bunx eslint {staged_files}
+    typecheck:
+      run: bunx tsc --noEmit
+
+commit-msg:
+  commands:
+    lint-commit-msg:
+      run: bunx commitlint --edit {1}

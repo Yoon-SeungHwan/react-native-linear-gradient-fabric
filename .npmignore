@@ -1,0 +1,28 @@
+# Dotfiles
+.*
+
+# Example app
+example/
+
+# Tests
+__tests__/
+**/__tests__/
+*.test.ts
+*.test.tsx
+
+# Development
+.idea/
+.vscode/
+*.log
+lefthook.yml
+
+# Build artifacts
+android/build/
+ios/build/
+*.tgz
+
+# Source maps
+*.map
+
+# Documentation sources (keep README.md)
+CONTRIBUTING.md
